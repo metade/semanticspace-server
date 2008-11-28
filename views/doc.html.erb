@@ -1,0 +1,11 @@
+<ul>
+<% @docs.each do |doc| %>
+  <li><%= link_to(doc.name, R(Doc, doc.ident)) %> (<%= doc.similarity %>)</li>
+<% end %>
+</ul>
+
+<ul>
+<% @terms.each do |term| %>
+  <li><%= link_to(term.name, R(Term, term.ident)) %> (<%= term.similarity %>)</li>
+<% end %>
+</ul>
