@@ -11,7 +11,7 @@ module Camping::Controllers
     def get(path)
       @headers['Content-Type'] = MIME_TYPES[path[/\.\w+$/, 0]] || "text/plain"
       unless path.include? ".." # prevent directory traversal attacks
-        @headers['X-Sendfile'] = "#{PATH}/static/#{path}"
+        @headers['X-Sendfile'] = "#{PATH}/public/#{path}"
       else
         @status = "403"
         "403 - Invalid path"
@@ -30,8 +30,7 @@ module CampingGoodies
   end  
   
   def not_found(type, brand)
-    content = layout { Mab.new{div.header! { h1(P);h2("#{type} #{brand} not found")} } }
-    r(404, content)
+    r(404, render(:not_found))
   end
   
   def accept(format=nil)

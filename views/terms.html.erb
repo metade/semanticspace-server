@@ -1,0 +1,5 @@
+<ul>
+<% @terms.each do |term| %>
+  <li><%= link_to(term, R(Term, term)) %></li>
+<% end %>
+</ul>

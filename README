@@ -1,0 +1,9 @@
+
+= Example
+
+* Create a Semantic Space, e.g.
+ssmake data/test_space.llss data/test_space.txt
+
+* Create a semanticspace.yml file, e.g.
+cp config/semanticspace.yml.example config/semanticspace.yml
+

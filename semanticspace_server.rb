@@ -78,10 +78,10 @@ module SemanticspaceServer::Controllers
     end
   end
   
-  class Terms < R '/terms'
-    def get
-      @docs = space.list_terms(true)
-      respond_to(format, @docs) or render(:terms)
+  class Terms < R '/terms', '/terms\.(.*)'
+    def get(format=nil)
+      @terms = space.list_terms
+      respond_to(format, @terms) or render(:terms)
     end
   end
   
