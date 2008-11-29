@@ -1,24 +1,26 @@
 require 'rubygems'
+require 'drb'
 require 'yaml'
 require 'json'
 require 'camping'
 require 'mime/types'
 
-require 'camping_goodies'
 require 'semanticspace'
 include SemanticSpace
+
+require 'camping_goodies'
 
 Camping.goes :SemanticspaceServer
 module SemanticspaceServer
   include CampingGoodies
   
-  if $space.nil?
-    config = YAML.load_file('config/semanticspace.yml')
-    puts "loading space: #{config[:space]}"
-    $space = SemanticSpace::read_semanticspace(config[:space])
-    $docs = YAML.load_file(config[:docs])
-    $terms = YAML.load_file(config[:terms])
-  end
+  config = YAML.load_file('config/semanticspace.yml')
+  
+  DRb.start_service
+  backend = DRbObject.new nil, config[:drb_uri]
+  $space = backend.space
+  $docs = backend.docs
+  $terms = backend.terms
   
   def space
     $space

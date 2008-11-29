@@ -3,3 +3,4 @@
   :space: data/test_space.llss
   :docs: data/test_docs.yml
   :terms: data/test_terms.yml
+  :drb_uri: druby://localhost:54468
